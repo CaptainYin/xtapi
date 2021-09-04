@@ -62,4 +62,19 @@ def get_auth_payload(param:dict) -> dict:
     auth = Auth(AuthKey.PUBLIC_KEY, AuthKey.SECRET_KEY)
     return auth.create_payload(param)
 
-
+import random
+def get_random(a,b):
+    return random.random()*(b-a)+a
+def Mysample(func,a,b,c,size):
+# a,b,c, is the Monte Carlo range for x,y
+# must cover func
+# defaut func>0
+    cout=0
+    res=[]
+    for i in range(size):
+        x=get_random(a,b)
+        y=get_random(0,c)
+        if(func(x)>y):
+            cout+=1
+            res.append(x)
+    return res

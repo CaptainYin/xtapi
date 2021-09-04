@@ -60,6 +60,7 @@ class RequestAPI:
                     response.raise_for_status()
                     
                 except requests.exceptions.RequestException as e:
+                    time.sleep(random.randint(1,3))
                     logger.info(f'Request timeout, retry operation::[{e}]........')
                 else:
                     if response.status_code == 200 and response:
@@ -67,9 +68,9 @@ class RequestAPI:
                         res = response.json()
                         return True, res, response
                 finally:
-                    time.sleep(random.randint(1,3))
-                    i += 1
-                    print(f"Please wait a moment...retry now... times is {i}")
+                    time.sleep(0.11)
+                #     i += 1
+                #     print(f"Please wait a moment...retry now... times is {i}")
             else:
                 logger.error(f'error Request timeout, retry operation failed::{url}::{parmas}')
 
@@ -94,12 +95,13 @@ class RequestAPI:
                         res = response.json()
                         return True, res, response
                 except requests.exceptions.RequestException as e:
+                    time.sleep(random.randint(1,3))
                     logger.info(f'Request timeout, retry operation::[{e}]........')
                     
                 finally:
-                    time.sleep(random.randint(1,3))
-                    i += 1
-                    print(f"Please wait a moment...retry now... times is {i}")
+                    time.sleep(0.11)
+                #     i += 1
+                #     print(f"...retry now... times is {i}")
                     
             else:
                 logger.error(f'error Request timeout, retry operation failed::{url}::{parmas}')
